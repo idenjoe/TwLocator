@@ -1,18 +1,22 @@
 package io.keepcoding.twlocator.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.keepcoding.twlocator.R;
 import io.keepcoding.twlocator.util.NetworkHelper;
@@ -49,11 +53,9 @@ import twitter4j.auth.RequestToken;
 
 public class MainActivity extends ActionBarActivity implements ConnectTwitterTask.OnConnectTwitterListener {
 
+    GoogleMap googleMap;
     ConnectTwitterTask twitterTask;
     private static final int URL_LOADER = 0;
-
-    @Bind(R.id.button)
-    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +76,30 @@ public class MainActivity extends ActionBarActivity implements ConnectTwitterTas
 
         }
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchTwitter();
-            }
-        });
+        this.initMap();
+
+    }
+
+    private void initMap() {
+        if (googleMap == null) {
+            ((MapFragment) getFragmentManager().findFragmentById(
+                    R.id.map)).getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap map) {
+                    googleMap = map;
+
+                    // check if map is created successfully or not
+                    if (googleMap == null) {
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                                .show();
+                    } else {
+                        googleMap.setMyLocationEnabled(true);
+                        googleMap.getUiSettings().setRotateGesturesEnabled(false);
+                    }
+                }
+            });
+        }
     }
 
     private void launchTwitter() {

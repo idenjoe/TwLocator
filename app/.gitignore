@@ -1,0 +1,5 @@
+/build
+
+###Twitter API Config file
+/src/main/java/io/keepcoding/twlocator/util/twitter/TwitterPrivateKeyAndSecret.java
+

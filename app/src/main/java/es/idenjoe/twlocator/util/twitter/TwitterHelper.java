@@ -1,6 +1,4 @@
-
-
-package io.keepcoding.twlocator.util.twitter;
+package es.idenjoe.twlocator.util.twitter;
 
 
 import android.content.Context;

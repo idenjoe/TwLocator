@@ -1,6 +1,6 @@
 
 
-package io.keepcoding.twlocator.util.twitter;
+package es.idenjoe.twlocator.util.twitter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import io.keepcoding.twlocator.R;
+import es.idenjoe.twlocator.R;
 
 
 public class ConnectTwitterTask extends AsyncTask<Void, Void, Void> {

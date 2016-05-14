@@ -1,10 +1,11 @@
-package io.keepcoding.twlocator.activities;
+package es.idenjoe.twlocator.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +19,10 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import butterknife.ButterKnife;
-import io.keepcoding.twlocator.R;
-import io.keepcoding.twlocator.util.NetworkHelper;
-import io.keepcoding.twlocator.util.twitter.ConnectTwitterTask;
-import io.keepcoding.twlocator.util.twitter.TwitterHelper;
+import es.idenjoe.twlocator.R;
+import es.idenjoe.twlocator.util.NetworkHelper;
+import es.idenjoe.twlocator.util.twitter.ConnectTwitterTask;
+import es.idenjoe.twlocator.util.twitter.TwitterHelper;
 import twitter4j.AccountSettings;
 import twitter4j.AsyncTwitter;
 import twitter4j.Category;
@@ -51,7 +52,7 @@ import twitter4j.auth.OAuth2Token;
 import twitter4j.auth.RequestToken;
 
 
-public class MainActivity extends ActionBarActivity implements ConnectTwitterTask.OnConnectTwitterListener {
+public class MainActivity extends AppCompatActivity implements ConnectTwitterTask.OnConnectTwitterListener {
 
     GoogleMap googleMap;
     ConnectTwitterTask twitterTask;
@@ -94,6 +95,16 @@ public class MainActivity extends ActionBarActivity implements ConnectTwitterTas
                                 "Sorry! unable to create maps", Toast.LENGTH_SHORT)
                                 .show();
                     } else {
+                        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
                         googleMap.setMyLocationEnabled(true);
                         googleMap.getUiSettings().setRotateGesturesEnabled(false);
                     }

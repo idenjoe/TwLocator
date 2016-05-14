@@ -1,4 +1,4 @@
-package io.keepcoding.twlocator.util;
+package es.idenjoe.twlocator.util;
 
 import android.app.Application;
 import android.content.Context;

@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 'Google Inc.:Google APIs:23'
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.2'
     defaultConfig {
         applicationId 'es.idenjoe.twlocator'
         minSdkVersion 17
